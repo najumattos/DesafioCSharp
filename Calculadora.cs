@@ -2,12 +2,19 @@
 
 namespace DesafioCSharp
 {
-    class Calculadora
+        class Calculadora
     {
         private double numUm;
         private double numDois;
-        private int operacao;
+        private Operacao operacaoEscolhida;
         private double resultado;
+        private enum Operacao{
+             Soma =1,
+             Subtracaoo =2,  
+             Multiplicacao =3,  
+             Divisao =4
+         }
+        
         private void ReceberDados()
         {
             try {
@@ -21,7 +28,8 @@ namespace DesafioCSharp
                                 "\n  2. Subtração" +
                                 "\n  3. Multiplicação" +
                                 "\n  4. Divisão");
-                operacao = Convert.ToInt32(Console.ReadLine());
+               int operacaoDigitada = int.Parse(Console.ReadLine());
+               Operacao operacaoEscolhida = (Operacao)operacaoDigitada;
             }
             catch (FormatException)
             {
@@ -32,11 +40,11 @@ namespace DesafioCSharp
 
         private void Calcular()
         {
-            switch (operacao)
+            switch (operacaoEscolhida)
             {
                 case 1:
                     resultado = numUm + numDois;
-                    Console.WriteLine($"Resultado da Soma: {resultado}");
+                    
                     break;
                 case 2:
                     resultado = numUm - numDois;
@@ -56,10 +64,14 @@ namespace DesafioCSharp
             }
         }
 
+private void ExibirResultado(){
+    Console.WriteLine($"Resultado da {operacaoEscolhida.ToString()}: {resultado}");
+}
         public void Executar() { 
         
             ReceberDados();
             Calcular();
+            ExibirResultado();
         }
     }
 }
