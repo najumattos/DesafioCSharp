@@ -4,9 +4,10 @@ namespace DesafioCSharp
 {
     class CalculadoraIMC
     {
-        private double peso;
+         private double peso;
         private double altura;
         private double imc;
+        private string classificacaoFinal;
         private readonly string[] classificacao = new string[]
         {
             "Abaixo do Peso",
@@ -36,39 +37,44 @@ namespace DesafioCSharp
 
         private void CalcularIMC()
         {
-            imc = (peso / (altura * altura))*100;
+            imc = peso / (altura * altura);
             Console.WriteLine(imc);
             if (imc < 18.5)
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[0]}"); //Abaixo do Peso
+                classificacaoFinal = classificacao[0]; //Abaixo do Peso
             }
             else if ((imc >= 18.5) && (imc < 25))
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[1]}"); //Peso Ideal
+                classificacaoFinal = classificacao[1]; //Peso Ideal
             }
             else if ((imc >= 25) && (imc < 30))
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[1]}"); //Sobrepeso
+                classificacaoFinal = classificacao[2]; //Sobrepeso
 
             }
             else if ((imc >= 30) && (imc < 35))
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[2]}"); //Obesidade I
+                classificacaoFinal = classificacao[3]; //Obesidade I
             }
             else if ((imc >= 35) && (imc < 40))
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[3]}"); //Obesidade II
+               classificacaoFinal = classificacao[4]; //Obesidade II
             }
             else
             {
-                Console.WriteLine($"Seu IMC é {imc:F2} - {classificacao[4]}"); //Obesidade III
+               classificacaoFinal = classificacao[5]; //Obesidade III
             }
+        }
+        
+        private void ExibirResultado(){
+             Console.WriteLine($"Seu IMC é {imc:F2} - {classificacaoFinal}");
         }
         public void Executar()
         {
             Console.WriteLine("Calculadora de IMC");
             ReceberDados();
             CalcularIMC();
+            ExibirResultado();
         }
     }
 }
